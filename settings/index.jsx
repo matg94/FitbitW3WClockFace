@@ -2,7 +2,7 @@ function mySettings(props) {
   return (
     <Page>
       <Section
-        title={<Text bold align="center">TFL Settings</Text>}>
+        title={<Text bold align="center">Simple W3W ClockFace</Text>}>
         <Toggle
           settingsKey="heartRed"
           label="Set Heart Red"
@@ -15,10 +15,7 @@ function mySettings(props) {
           settingsKey="threewords"
           label="Show What3Words"
         />
-        <Toggle
-          settingsKey="centraldot"
-          label="Show Central Dot"
-        />
+        <Text bold align="center">Circle Color</Text>
         <ColorSelect
           label="Circle Color"
           settingsKey="circle-color"
@@ -31,6 +28,7 @@ function mySettings(props) {
             {color: "plum"}
           ]}
         />
+        <Text bold align="center">Central Dot Color</Text>
         <ColorSelect
           label="Central Dot Color"
           settingsKey="centraldot-color"
@@ -43,6 +41,7 @@ function mySettings(props) {
             {color: "plum"}
           ]}
         />
+        <Text bold align="center">Background Color</Text>
         <ColorSelect
           label="Background Color"
           settingsKey="background-color"

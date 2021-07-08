@@ -1,5 +1,4 @@
 import document from "document";
-import "datetime";
 
 let background = document.getElementById("background");
 let circle = document.getElementById("background-circle");
@@ -12,12 +11,12 @@ let hr = document.getElementById("heart");
 let threewords = document.getElementById("threewords");
 
 
-function updateClockAndDate(timeString, dateString) {
+export function updateClockAndDate(timeString, dateString) {
   time.text = timeString;
   date.text = dateString;
 }
 
-const handleStatusChange = (evt) => {
+export const handleStatusChange = (evt) => {
   if (!evt.data.newValue) {
     return
   }
@@ -63,6 +62,3 @@ const handleStatusChange = (evt) => {
       break;
   }
 }
-
-
-messaging.peerSocket.onmessage = handleStatusChange
