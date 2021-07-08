@@ -17,9 +17,6 @@ export function updateClockAndDate(timeString, dateString) {
 }
 
 export const handleStatusChange = (evt) => {
-  if (!evt.data.newValue) {
-    return
-  }
   switch (evt.data.key) {
     case "background-color":
       background.style.fill = JSON.parse(evt.data.newValue);
@@ -58,7 +55,7 @@ export const handleStatusChange = (evt) => {
       }
       break;
     case "threewordsdata":
-      threewords.text = JSON.parse(evt.data.newValue);
+      threewords.text = evt.data.newValue;
       break;
   }
 }

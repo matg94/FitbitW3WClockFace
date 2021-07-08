@@ -1,5 +1,39 @@
 import * as messaging from "messaging";
 import { settingsStorage } from "settings";
+import { geolocation } from "geolocation";
+
+const convertTo3wa = (coords) => {
+  if (!coords) {
+    return
+  }
+  let url = "https://api.what3words.com/v3/convert-to-3wa"
+  url += "?coordinates=" + coords.lat + '%2C'+ coords.lng + "&key=" + "42APDQ9T";
+  fetch(url).then((resp) => resp.json()
+    .then((data) => {
+      var words = data.words;
+      sendWhatThreeWords(words);
+  })).catch((err) => {
+    console.log(err);
+  });
+}
+
+const locationSuccess = (position) => {
+  const words = convertTo3wa( {lat: position.coords.latitude, lng: position.coords.longitude} );
+  convertTo3wa(words);
+}
+
+const locationError = (error) => {
+  console.log("Error: " + error.code,
+              "Message: " + error.message);
+}
+
+const sendWhatThreeWords = (words) => {
+  let data = {
+    key: "threewordsdata",
+    newValue: words
+  };
+  sendVal(data);
+}
 
 // Message socket opens
 messaging.peerSocket.onopen = () => {
@@ -41,3 +75,6 @@ function sendVal(data) {
     messaging.peerSocket.send(data);
   }
 }
+
+var watchID = geolocation.watchPosition(locationSuccess, locationError, { timeout: 60 * 1000 });
+

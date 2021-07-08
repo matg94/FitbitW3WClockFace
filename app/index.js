@@ -26,4 +26,21 @@ clock.addEventListener("tick", (evt) => {
   updateClockAndDate(timeString, dateString);
 });
 
-messaging.peerSocket.onmessage = handleStatusChange
+messaging.peerSocket.onclose = function() {
+  console.log("SOCKER IS CLOSED");
+}
+
+messaging.peerSocket.onopen = function() {
+  console.log("SOCKET IS OPEN");
+}
+
+// Listen for the onmessage event
+messaging.peerSocket.onmessage = function(evt) {
+  handleStatusChange(evt);
+}
+
+// Listen for the onerror event
+messaging.peerSocket.onerror = function(err) {
+  // Handle any errors
+  console.log(err);
+}
