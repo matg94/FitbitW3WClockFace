@@ -38,18 +38,11 @@ export const handleStatusChange = (evt) => {
         heart.href = "heart_black.png"
       }
       break;
-    case "textWhite":
-      if (JSON.parse(evt.data.newValue) == true) {
-        time.style.fill = "white";
-        date.style.fill = "white";
-        hr.style.fill = "white";
-        threewords.style.fill = "white";
-      } else {
-        time.style.fill = "black";
-        date.style.fill = "black";
-        hr.style.fill = "black";
-        threewords.style.fill = "black";
-      }
+    case "text-color":
+      time.style.fill = JSON.parse(evt.data.newValue);
+      date.style.fill = JSON.parse(evt.data.newValue);
+      hr.style.fill = JSON.parse(evt.data.newValue);
+      threewords.style.fill = JSON.parse(evt.data.newValue);
       break;
     case "threewords":
       if (JSON.parse(evt.data.newValue) == true) {

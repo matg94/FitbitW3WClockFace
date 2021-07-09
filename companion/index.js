@@ -6,10 +6,11 @@ const convertTo3wa = (coords) => {
   if (!coords) {
     return
   }
-  let w3wApiKey = JSON.parse(settingsStorage.getItem("w3wapikey")).name;
-  console.log(w3wApiKey);
-  if (w3wApiKey == null || w3wApiKey == '') {
-    w3wApiKey = "42APDQ9T";
+  let w3wApiKey = "42APDQ9T"
+  try {
+    w3wApiKey = JSON.parse(settingsStorage.getItem("w3wapikey")).name;
+  } catch {
+    console.log("can't retrieve w3w api key, using default");
   }
   console.log("Finalkey", w3wApiKey);
   let url = "https://api.what3words.com/v3/convert-to-3wa"
@@ -73,6 +74,7 @@ function restoreSettings() {
         key: key,
         newValue: settingsStorage.getItem(key)
       };
+      checkSettingsChanges(data);
       sendVal(data);
     }
   }
@@ -86,7 +88,6 @@ function sendVal(data) {
 }
 
 function checkSettingsChanges(evt) {
-  console.log("KEY", evt);
   switch (evt.key) {
     case "threewords":
       if (JSON.parse(evt.newValue) == false) {

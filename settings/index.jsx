@@ -7,13 +7,22 @@ function mySettings(props) {
           settingsKey="heartRed"
           label="Set Heart Red"
          />
-        <Toggle 
-          settingsKey="textWhite"
-          label="Set Text White"
-        />
         <Toggle
           settingsKey="threewords"
           label="Show What3Words"
+        />
+        <Text bold align="center">Text Color</Text>
+        <ColorSelect
+          label="Text Color"
+          settingsKey="text-color"
+          colors={[
+            {color: "black"},
+            {color: "white"},
+            {color: "grey"},
+            {color: "#ADFF2F"},
+            {color: "deepskyblue"},
+            {color: "plum"}
+          ]}
         />
         <Text bold align="center">Circle Color</Text>
         <ColorSelect
@@ -54,6 +63,7 @@ function mySettings(props) {
             {color: "plum"}
           ]}
         />
+        <Text>There is a What3Words default key that will be used, if you prefer to use your own, add it here.</Text>
          <TextInput
             label="What 3 Words API Key"
             settingsKey="w3wapikey"
