@@ -54,6 +54,10 @@ function mySettings(props) {
             {color: "plum"}
           ]}
         />
+         <TextInput
+            label="What 3 Words API Key"
+            settingsKey="w3wapikey"
+          />
       </Section>
     </Page>
   );

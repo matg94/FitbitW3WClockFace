@@ -6,5 +6,5 @@
   <circle cx="50%" cy="50%" r="1%" fill="black" id="centraldot" />
   <text x="50%" y = "63%" id="threewords" text-anchor="middle" font-size="30">apple.cherry.banana</text>
   <image x="50%-15" y="70%" id="hearticon" width="30" height="30" href="heart_black.png"/>
-  <text x="50%" y="90%" id="heart" text-anchor="middle" font-size="40">94</text>
+  <text x="50%" y="90%" id="heart" text-anchor="middle" font-size="40">100</text>
 </svg>

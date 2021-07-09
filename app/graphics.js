@@ -16,6 +16,10 @@ export function updateClockAndDate(timeString, dateString) {
   date.text = dateString;
 }
 
+export function updateHeartRate(heartRate) {
+  hr.text = heartRate;
+}
+
 export const handleStatusChange = (evt) => {
   switch (evt.data.key) {
     case "background-color":

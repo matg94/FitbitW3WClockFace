@@ -6,8 +6,15 @@ const convertTo3wa = (coords) => {
   if (!coords) {
     return
   }
+  let w3wApiKey = JSON.parse(settingsStorage.getItem("w3wapikey")).name;
+  console.log(w3wApiKey);
+  if (w3wApiKey == null || w3wApiKey == '') {
+    w3wApiKey = "42APDQ9T";
+  }
+  console.log("Finalkey", w3wApiKey);
   let url = "https://api.what3words.com/v3/convert-to-3wa"
-  url += "?coordinates=" + coords.lat + '%2C'+ coords.lng + "&key=" + "42APDQ9T";
+  url += "?coordinates=" + coords.lat + '%2C'+ coords.lng + "&key=" + w3wApiKey;
+  console.log(url);
   fetch(url).then((resp) => resp.json()
     .then((data) => {
       var words = data.words;
@@ -48,6 +55,7 @@ messaging.peerSocket.onclose = () => {
 
 // A user changes settings
 settingsStorage.onchange = evt => {
+  checkSettingsChanges(evt);
   let data = {
     key: evt.key,
     newValue: evt.newValue
@@ -59,6 +67,7 @@ settingsStorage.onchange = evt => {
 function restoreSettings() {
   for (let index = 0; index < settingsStorage.length; index++) {
     let key = settingsStorage.key(index);
+    if (key == "w3wapikey") { continue; }
     if (key) {
       let data = {
         key: key,
@@ -76,5 +85,18 @@ function sendVal(data) {
   }
 }
 
-var watchID = geolocation.watchPosition(locationSuccess, locationError, { timeout: 60 * 1000 });
+function checkSettingsChanges(evt) {
+  console.log("KEY", evt);
+  switch (evt.key) {
+    case "threewords":
+      if (JSON.parse(evt.newValue) == false) {
+        geolocation.clearWatch(watchID);
+      } else {
+        var watchID = geolocation.watchPosition(locationSuccess, locationError, { timeout: 60 * 1000 });
+      }
+      break;
+  }
+}
+
+
 

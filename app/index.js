@@ -1,6 +1,7 @@
 import clock from 'clock';
-import { updateClockAndDate, handleStatusChange } from './graphics.js';
+import { updateClockAndDate, handleStatusChange, updateHeartRate } from './graphics.js';
 import * as messaging from "messaging";
+import { HeartRateSensor } from "heart-rate";
 
 const months = {
   0: 'Jan',
@@ -17,6 +18,16 @@ const months = {
   11: 'Dec'
 }
 
+console.log(HeartRateSensor);
+
+const heartRateMonitor = new HeartRateSensor();
+
+heartRateMonitor.addEventListener("reading", () => {
+  updateHeartRate(heartRateMonitor.heartRate);
+})
+
+heartRateMonitor.start();
+
 clock.granularity = "minutes";
 
 clock.addEventListener("tick", (evt) => {
@@ -25,6 +36,7 @@ clock.addEventListener("tick", (evt) => {
   const timeString = evt.date.toTimeString().slice(0, -4);
   updateClockAndDate(timeString, dateString);
 });
+
 
 messaging.peerSocket.onclose = function() {
   console.log("SOCKER IS CLOSED");
