@@ -31,9 +31,11 @@ heartRateMonitor.start();
 clock.granularity = "minutes";
 
 clock.addEventListener("tick", (evt) => {
-  let date = new Date();
+  let date = evt.date;
+  let offset = evt.date.getTimezoneOffset() * 60 * 1000;
+  date = date.setTime(date - offset);
   const dateString = months[date.getMonth()] + ' ' + date.getDate();
-  const timeString = evt.date.toTimeString().slice(0, -4);
+  const timeString = date.toTimeString();
   updateClockAndDate(timeString, dateString);
 });
 
